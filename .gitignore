@@ -1,0 +1,19 @@
+# Rust's output directory
+target
+
+# Local settings
+.soroban
+.stellar
+
+# Temp deployment/debug scripts
+debug_deploy.py
+debug2.py
+deploy3.py
+deploy_node.mjs
+deploy_result.json
+sim_out.json
+contract_id.txt
+deploy.log
+
+# Rust installer
+rustup-init.exe
