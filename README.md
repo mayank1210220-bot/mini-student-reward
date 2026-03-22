@@ -1,108 +1,81 @@
-# 🎓 Mini Student Reward — Stellar Soroban Smart Contract
+# Mini Student Reward 🎓
 
-A Stellar Soroban smart contract that lets **teachers reward students** on-chain using XLM token transfers, with on-chain event logging.
+A fully functional, decentralized Web3 application built on the Stellar Soroban blockchain. This dApp allows teachers to securely reward students with native XLM, featuring a clean frontend and an optimized Rust smart contract.
 
-## 📁 Project Structure
+## Deployment Details
 
-```
-mini-student-reward/
-├── contracts/
-│   ├── hello_world/         # Sample hello world contract
-│   └── mini_reward/         # Main reward contract
-│       └── src/
-│           ├── lib.rs        # Contract logic
-│           └── test.rs       # Unit tests
-├── frontend/
-│   ├── index.html            # Frontend UI
-│   └── app.js                # Stellar SDK + contract interaction
-├── Cargo.toml                # Workspace config
-├── deploy.sh                 # 🚀 Automated deploy script (Linux/macOS)
-└── .gitignore
-```
+*   **Contract ID:** `CAEY5RTYOVOZDXGIIXNITX5IGJ5RGWWQSYL7GXAQLTDXXHYKBUXLBRMUM`
+*   **Alias:** `mini_reward`
+*   **Network:** Stellar Testnet
 
-## ⚙️ Environment Setup
+## Dashboard Preview
 
-1. **Install Rust**
+![Dashboard Screenshot](./dashboard.png)
+
+## Stellar Labs
+
+![Stellar Labs Screenshot](./stellar-labs.png)
+
+## Features ✨
+
+*   **Non-Custodial Wallet Integration:** Securely connect and sign transactions using the [Freighter Browser Extension](https://www.freighter.app/).
+*   **On-Chain Rewards:** The smart contract allows authorized teachers to transfer tokens to students seamlessly.
+*   **Real-time Ledger Interaction:** View account balances and interact with the deployed contract in real time.
+*   **Storage Optimized:** Utilizes Soroban's state management to securely store configuration.
+*   **Clean UI:** A responsive frontend built with vanilla HTML/JS mimicking a modern dashboard.
+
+## Project Architecture 🏗️
+
+The project is divided into two main components:
+
+1.  **Smart Contract (`/contracts/mini_reward`)**: Written in Rust using the Soroban SDK (v25.3.0). It handles the core logic and token transfers.
+2.  **Frontend (`/frontend`)**: A lightweight HTML/JS Web3 application that interfaces with the deployed contract on the Soroban Testnet.
+
+---
+
+## Getting Started 🚀
+
+### Prerequisites
+
+*   [Node.js](https://nodejs.org/) (v18+) or Python for serving static files
+*   [Rust](https://www.rust-lang.org/) (v1.94+)
+*   [Stellar CLI](https://developers.stellar.org/docs/build/smart-contracts/getting-started/setup)
+*   [Freighter Wallet Extension](https://www.freighter.app/)
+
+### 1. Smart Contract
+
+The contract is already deployed to the Stellar Testnet. If you wish to interact or deploy it yourself:
+
+1. Build the contract:
    ```bash
-   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   stellar contract build
+   ```
+2. Run unit tests to verify contract logic:
+   ```bash
+   cargo test
+   ```
+3. Deploy the contract using the included script (you must have a funded Stellar testnet account):
+   ```bash
+   bash deploy.sh
    ```
 
-2. **Add WASM target**
+### 2. Frontend Application
+
+The frontend uses `@stellar/stellar-sdk` and `@stellar/freighter-api` to connect to the deployed contract.
+
+1. Navigate to the frontend directory:
    ```bash
-   rustup target add wasm32-unknown-unknown
+   cd frontend
    ```
-
-3. **Install Stellar CLI**
+2. Start the local server:
    ```bash
-   cargo install --locked stellar-cli --features opt
+   python -m http.server 8081
    ```
+3. Open your browser to `http://localhost:8081`.
 
-## 🛠 Build
+### Connecting your Wallet
 
-```bash
-stellar contract build
-```
-Output: `target/wasm32v1-none/release/soroban_mini_reward_contract.wasm`
-
-## 🌐 Configure Network
-
-```bash
-stellar network add testnet \
-  --rpc-url https://soroban-testnet.stellar.org:443 \
-  --network-passphrase "Test SDF Network ; September 2015"
-```
-
-## 🔑 Generate & Fund Identity
-
-```bash
-stellar keys generate dev-key --network testnet
-stellar keys fund dev-key --network testnet
-```
-
-## 🚀 Deploy to Testnet
-
-```bash
-stellar contract deploy \
-  --wasm target/wasm32v1-none/release/soroban_mini_reward_contract.wasm \
-  --source dev-key \
-  --network testnet
-```
-
-Or use the automated script:
-
-```bash
-bash deploy.sh
-```
-
-## 🔁 Invoke Contract
-
-```bash
-stellar contract invoke \
-  --id <CONTRACT_ID> \
-  --source dev-key \
-  --network testnet \
-  -- send_reward \
-  --token_address <NATIVE_TOKEN_ID> \
-  --teacher <TEACHER_ADDRESS> \
-  --student <STUDENT_ADDRESS> \
-  --amount 1000000 \
-  --reason "Excellent work!"
-```
-
-## 🌐 Deployed Contract
-
-| | |
-|---|---|
-| **Network** | Stellar Testnet |
-| **Contract ID** | `CBSPXW47FS2UPXOGAUNJU2U6KXPWS6JT45OEXH6UGV65HDZOK` |
-| **Frontend** | Run `python -m http.server 8081` in the `frontend/` folder |
-
-## 🧪 Run Tests
-
-```bash
-cargo test
-```
-
-## 📜 License
-
-MIT
+1. Install the Freighter extension.
+2. Switch the Freighter network to **Testnet**.
+3. Fund your Freighter wallet using the [Stellar Laboratory Friendbot](https://laboratory.stellar.org/#account-creator?network=test).
+4. Click **Connect Freighter** in the top right corner of the dApp.
