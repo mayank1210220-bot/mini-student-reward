@@ -4,7 +4,7 @@ A fully functional, decentralized Web3 application built on the Stellar Soroban 
 
 ## Deployment Details
 
-*   **Contract ID:** `CARNM57N7EY3H74SVT2HBPEWJQNMJKT5NL2URBMNV4OH`
+*   **Contract ID:** `CB4MXLTP3ZXOEJOKER27DKP3EQBXHPJS6N4MV4YABBIGIOXP6JBMFVQS`
 *   **Alias:** `mini_reward`
 *   **Network:** Stellar Testnet
 
